@@ -5,15 +5,18 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import com.example.slimesurvival.object.Enemy;
+import com.example.slimesurvival.object.Player;
 
 // Alt Return to get recommendations
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
+    private final Enemy enemy;
     private GameLoop gameLoop;
 
 
@@ -26,12 +29,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         //Initialising Game Loop
         gameLoop = new GameLoop(this, surfaceHolder);
-
-        //Initialising Player
-        player = new Player(getContext(),500,500,30);
-
         //Initialising Joystick
         joystick = new Joystick(275, 700, 70, 40);
+
+        //Initialising Player
+        player = new Player(getContext(),joystick,500,500,30);
+
+        //Initialising Enemy
+        enemy = new Enemy(getContext(),player,500,200,30);
+
+
         setFocusable(true);
     }
 
@@ -83,7 +90,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         joystick.draw(canvas);
         player.draw(canvas);
-
+        enemy.draw(canvas);
     }
 
     //Displays on the screen how many updates per second there are
@@ -110,7 +117,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
         //Updates the game state
         joystick.update();
-        player.update(joystick);
+        player.update();
+        enemy.update();
 
     }
 }
