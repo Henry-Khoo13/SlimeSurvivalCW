@@ -12,11 +12,35 @@ public class Enemy extends Circle{
 
     private static final double SPEED_PIXELS_PER_SECOND = Player.SPEED_PIXELS_PER_SECOND*0.6;//Player speed but slower
     private static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND/ GameLoop.MAX_UPS;//How fast the enemy can move
+    private static final double SPAWN_PER_MINUTE = 20;
+    private static final double SPAWNS_PER_SECOND = SPAWN_PER_MINUTE/60.0;
+    private static final double UPDATES_PER_SPAWN =GameLoop.MAX_UPS/SPAWNS_PER_SECOND;
+    private static double updatesUntilNextSpawn = UPDATES_PER_SPAWN;
     private final Player player;
 
-    public Enemy(Context context, Player player, double positionXi, double positionYi, double radiusi) {
+    public Enemy(Context context, Player player, double positionXi, double positionYi, double radiusi) {//Enemy testing class
         super(context, ContextCompat.getColor(context, R.color.enemy), positionXi, positionYi, radiusi);
         this.player = player;
+    }
+
+    public Enemy(Context context, Player player) {
+        super(context,
+                ContextCompat.getColor(context, R.color.enemy),
+                Math.random()*1000,
+                Math.random()*1000,
+                30);
+        this.player = player;
+    }
+
+    //Checks if an enemy should spawn on a given update loop spending on spawns per minute
+    public static boolean readyToSpawn() {
+        if(updatesUntilNextSpawn <= 0){
+            updatesUntilNextSpawn += UPDATES_PER_SPAWN;
+            return true;
+        }else{
+            updatesUntilNextSpawn--;
+            return false;
+        }
     }
 
     @Override
@@ -50,10 +74,5 @@ public class Enemy extends Circle{
         positionY += velocityY;
     }
 
-    private double GameObjectgetDistanceBetweenObjects(GameObject object1, GameObject object2) {
-        return Math.sqrt(
-                Math.pow(object2.getPositionX() - object1.getPositionX(),2)+
-                        Math.pow(object2.getPositionY() - object1.getPositionY(),2)
-        );
-    }
+
 }

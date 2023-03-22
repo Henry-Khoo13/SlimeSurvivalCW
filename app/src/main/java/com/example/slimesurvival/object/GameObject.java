@@ -8,8 +8,11 @@ public abstract class GameObject {
     protected double positionX;//Shared attributes between enemies and players
     protected double positionY;
 
-    protected double velocityX;
-    protected double velocityY;
+    protected double velocityX = 0;
+    protected double velocityY= 0;
+    protected double directionX= 1;
+    protected double directionY= 0;
+
     public GameObject(double positionXi,double positionYi){
         this.positionX = positionXi;
         this.positionY = positionYi;
@@ -22,6 +25,19 @@ public abstract class GameObject {
     }
     protected double getPositionY() {
         return positionY;
+    }
+    protected static double GameObjectgetDistanceBetweenObjects(GameObject object1, GameObject object2) {
+        return Math.sqrt(
+                Math.pow(object2.getPositionX() - object1.getPositionX(),2)+
+                        Math.pow(object2.getPositionY() - object1.getPositionY(),2)
+        );
+    }
+
+    protected double getDirectionX() {
+        return directionX;
+    }
+    protected double getDirectionY() {
+        return directionY;
     }
 }
 

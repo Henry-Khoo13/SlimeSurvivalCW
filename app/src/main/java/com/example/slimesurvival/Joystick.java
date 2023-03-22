@@ -66,11 +66,15 @@ public class Joystick {
     }
 
     public boolean isPressed(double x, double y) {
-        joystickCenterToTouchDistance = Math.sqrt(
-                Math.pow(outerCircleCenterPositionX - x,2)+
-                Math.pow(outerCircleCenterPositionY - y,2)
+        joystickCenterToTouchDistance = Utils.getDistanceBetweenPoints(
+                outerCircleCenterPositionX,
+                outerCircleCenterPositionY,
+                x,
+                y
+
         );
-        return joystickCenterToTouchDistance < outerCircleRadius;//If pressing inside the joystick outer circle radius return true
+
+    return joystickCenterToTouchDistance < outerCircleRadius;//If pressing inside the joystick outer circle radius return true
     }
 
     public void setIsPress(boolean b) {
@@ -84,10 +88,13 @@ public class Joystick {
     public void setActuator(double x, double y) {
         double DeltaX = x - outerCircleCenterPositionX;//Calculating the distance from center on X
         double DeltaY = y - outerCircleCenterPositionY;//Calculating the distance from center on Y
-        double deltaDistance = Math.sqrt(
-                Math.pow(DeltaX,2)+
-                Math.pow(DeltaY,2)
-        );//Calculating the distance from center
+        double deltaDistance = Utils.getDistanceBetweenPoints(
+                0,
+                0,
+                DeltaX,
+                DeltaY
+
+        ); //Calculating the distance from center
 
         if(deltaDistance < outerCircleRadius){
             actuatorX = DeltaX/outerCircleRadius;

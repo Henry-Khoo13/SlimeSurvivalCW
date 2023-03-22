@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import com.example.slimesurvival.GameLoop;
 import com.example.slimesurvival.Joystick;
 import com.example.slimesurvival.R;
+import com.example.slimesurvival.Utils;
 
 //Player is the playable main character of the game, controlled via joystick
 //Player object is a circle so takes the circle object
@@ -36,6 +37,14 @@ public class Player extends Circle{
         //Update Position based off speed amount
         positionX += velocityX;
         positionY += velocityY;
+
+        //update direction
+        if(velocityX != 0 || velocityY != 0){
+            //Normalize velocity to get direction ( unit vector of velocity)
+            double distance = Utils.getDistanceBetweenPoints(0,0,velocityX,velocityY);
+            directionX = velocityX/distance;
+            directionY = velocityY/distance;
+        }
     }
 
     public void setPosition(double x, double y) {
