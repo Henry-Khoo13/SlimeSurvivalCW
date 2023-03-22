@@ -6,10 +6,12 @@ import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.slimesurvival.GameDisplay;
 import com.example.slimesurvival.GameLoop;
 import com.example.slimesurvival.Joystick;
 import com.example.slimesurvival.R;
 import com.example.slimesurvival.Utils;
+import com.example.slimesurvival.graphics.Sprite;
 
 //Player is the playable main character of the game, controlled via joystick
 //Player object is a circle so takes the circle object
@@ -25,13 +27,14 @@ public class Player extends Circle{
     private Paint paint;
 
     private int healthPoints;
+    private Sprite sprite;
 
-    public Player(Context context,Joystick joystick, double positionXi, double positionYi, double radiusi){
+    public Player(Context context,Joystick joystick, double positionXi, double positionYi, double radiusi,Sprite sprite){
         super(context,ContextCompat.getColor(context, R.color.player),positionXi,positionYi, radiusi);//Specifying what constructor to take from
         this.joystick = joystick;
         this.healthBar = new HealthBar(context,this);
         this.healthPoints = MAX_HEALTH_POINTS;
-
+        this.sprite = sprite;
     }
 
 
@@ -58,9 +61,11 @@ public class Player extends Circle{
         this.positionY = y;
     }
 
-    public void draw(Canvas canvas){
-        super.draw(canvas);
-        healthBar.draw(canvas);
+    public void draw(Canvas canvas, GameDisplay gameDisplay){
+        sprite.draw(canvas,
+                (int)gameDisplay.gameToDisplayCoordinatesX(getPositionX())-sprite.getWidth()/2,
+                (int)gameDisplay.gameToDisplayCoordinatesY(getPositionY())-sprite.getHeight()/2);
+        healthBar.draw(canvas,gameDisplay);
     }
     public int getHealthPoints(){
         return healthPoints;

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.slimesurvival.GameDisplay;
 import com.example.slimesurvival.R;
 
 
@@ -33,7 +34,7 @@ public class HealthBar {
 
     }
 
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas, GameDisplay gameDisplay){
         float x = (float) player.getPositionX();
         float y = (float) player.getPositionY();
         float distanceToPlayer = 30;
@@ -45,7 +46,11 @@ public class HealthBar {
         borderRight = x + width/2;
         borderBottom = y - distanceToPlayer;
         borderTop = borderBottom - height;
-        canvas.drawRect(borderLeft, borderTop, borderRight,borderBottom, borderPaint);
+        canvas.drawRect(
+                (float) gameDisplay.gameToDisplayCoordinatesX(borderLeft),
+                (float) gameDisplay.gameToDisplayCoordinatesY(borderTop),
+                (float) gameDisplay.gameToDisplayCoordinatesX(borderRight),
+                (float) gameDisplay.gameToDisplayCoordinatesY(borderBottom), borderPaint);
 
         //Draw Health
         float healthWidth, healthHeight, healthLeft, healthTop, healthRight,healthBottom;
@@ -55,6 +60,10 @@ public class HealthBar {
         healthRight = borderLeft + healthWidth*healthPointsPercentage;//Width will vary depending on health
         healthBottom = borderBottom - margin;
         healthTop = healthBottom - healthHeight;
-        canvas.drawRect(healthLeft, healthTop, healthRight,healthBottom, healthPaint);
+        canvas.drawRect(
+                (float) gameDisplay.gameToDisplayCoordinatesX(healthLeft),
+                (float) gameDisplay.gameToDisplayCoordinatesY(healthTop),
+                (float) gameDisplay.gameToDisplayCoordinatesX(healthRight),
+                (float) gameDisplay.gameToDisplayCoordinatesY(healthBottom), healthPaint);
     }
 }

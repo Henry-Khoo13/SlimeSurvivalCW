@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/spritesheet" />
+    <!-- Sprite from:
+    https://www.deviantart.com/mackieftw/art/Simple-2D-Mage-Sprite-sheet-510904642
+    https://www.deviantart.com/entharia/art/Slime-2D-Game-Asset-839864202
+    -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

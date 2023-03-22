@@ -1,7 +1,9 @@
 package com.example.slimesurvival;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -9,6 +11,7 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import com.example.slimesurvival.graphics.SpriteSheet;
 import com.example.slimesurvival.object.Circle;
 import com.example.slimesurvival.object.Enemy;
 import com.example.slimesurvival.object.Player;
@@ -28,6 +31,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private int joystickPointerID=0;
     private int numberOfSpellsToCast = 0;
+    private GameDisplay gameDisplay;
 
 
     public Game(Context context) {
@@ -43,12 +47,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         joystick = new Joystick(275, 700, 70, 40);
 
         //Initialising Player
-        player = new Player(getContext(),joystick,500,500,30);
+        SpriteSheet spriteSheet = new SpriteSheet(context);
+        player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite());
 
         //Initialising Enemy
         //enemy = new Enemy(getContext(),player,500,200,30);
 
-
+        //Initialising GameDisplay centered around player
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        gameDisplay = new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels,player);
         setFocusable(true);
     }
 
@@ -114,12 +122,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         drawFPS(canvas);
 
         joystick.draw(canvas);
-        player.draw(canvas);
+        player.draw(canvas, gameDisplay);
         for(Enemy enemy:enemyList){
-            enemy.draw(canvas);
+            enemy.draw(canvas, gameDisplay);
         }
         for(Spell spell:spellList){//Update through spell list
-            spell.draw(canvas);
+            spell.draw(canvas, gameDisplay);
         }
         //enemy.draw(canvas);
     }
@@ -156,7 +164,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
         //Create a new enemy if it is time to create a new enemy (No spamming spawning, setting them up at a fair rate)
         if(Enemy.readyToSpawn()){
-            enemyList.add(new Enemy(getContext(),player));
+            SpriteSheet spriteSheet = new SpriteSheet(getContext());
+            enemyList.add(new Enemy(getContext(),player,spriteSheet.getEnemySprite()));
         }
         //enemy.update();
         for(Enemy enemy:enemyList){ //Update through enemy list
@@ -189,6 +198,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
             }
         }
-
+        gameDisplay.update();
     }
 }
