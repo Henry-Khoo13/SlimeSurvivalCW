@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 // Alt Return to get recommendations
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
+    private final Joystick joystick;
     private GameLoop gameLoop;
 
 
@@ -28,7 +29,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         //Initialising Player
         player = new Player(getContext(),500,500,30);
-        
+
+        //Initialising Joystick
+        joystick = new Joystick(275, 700, 70, 40);
         setFocusable(true);
     }
 
@@ -36,10 +39,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         switch(event.getAction()){
             case MotionEvent.ACTION_DOWN: //Upon pressing the screen move position of player
-                player.setPosition((double)event.getX(),(double)event.getY());
+                if(joystick.isPressed((double)event.getX(),(double)event.getY())){
+                    joystick.setIsPress(true);
+                }
+
                 return true;
             case MotionEvent.ACTION_MOVE: //Upon pressing and holding the screen move position of player
-                player.setPosition((double)event.getX(),(double)event.getY());
+                if(joystick.getisPressed()){
+                    joystick.setActuator((double)event.getX(),(double)event.getY());
+                }
+
+                return true;
+            case MotionEvent.ACTION_UP: //Upon pressing and holding the screen move position of player
+                joystick.setIsPress(false);
+                joystick.resetActuator();
                 return true;
         }
         return super.onTouchEvent(event);
@@ -68,7 +81,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         drawUPS(canvas);
         drawFPS(canvas);
 
+        joystick.draw(canvas);
         player.draw(canvas);
+
     }
 
     //Displays on the screen how many updates per second there are
@@ -94,6 +109,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         //Updates the game state
-        player.update();
+        joystick.update();
+        player.update(joystick);
+
     }
 }
