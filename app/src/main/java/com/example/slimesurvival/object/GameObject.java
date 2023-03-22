@@ -5,6 +5,7 @@ import android.graphics.Paint;
 
 //Parent Class of all objects such as Enemey and Player
 public abstract class GameObject {
+
     protected double positionX;//Shared attributes between enemies and players
     protected double positionY;
 
