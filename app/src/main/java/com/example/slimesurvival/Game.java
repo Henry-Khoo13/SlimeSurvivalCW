@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-// Alt Return to get recommendations
+// Base game with all the objects initialised within.
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
@@ -74,8 +74,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameOver = new GameOver(context);
 
 
-        //Initialising Enemy
-        //enemy = new Enemy(getContext(),player,500,200,30);
+        //Initialising Enemy Used for testing enemy
+        //enemy = new Enemy(getContext(),player,450,150,30);
 
         //Initialising GameDisplay centered around player
         DisplayMetrics displayMetrics = new DisplayMetrics();

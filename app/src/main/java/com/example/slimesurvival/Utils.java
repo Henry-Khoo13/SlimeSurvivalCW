@@ -1,8 +1,10 @@
 package com.example.slimesurvival;
 
+//Useful utility function
 public class Utils {
     /**
      * getDistancebetweenpoints returns the distance between the two points p1 and p2
+     * A common utily function used for areas such as the joystick.
      * @param p1x
      * @param p1y
      * @param p2x

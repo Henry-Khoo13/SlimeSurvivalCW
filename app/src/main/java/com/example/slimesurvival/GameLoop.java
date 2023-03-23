@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.content.Intent;
-/*
+/**
 The game Loop of the game is the main engine of the game
 This will handle game progression
 Updates states and objects within the game (E.G. position and texture)
@@ -22,24 +22,30 @@ public class GameLoop extends Thread{
     private double AverageFPS;
     private int score = 0;
 
+    /**
+     * Constructor intiating the game loop
+     * @param game
+     * @param surfaceHolder
+     */
     public GameLoop(Game game, SurfaceHolder surfaceHolder) {
         this.game = game;
         this.surfaceHolder = surfaceHolder;
     }
 
-    public double getAverageUPS() {
-        return AverageUPS;
-    }
 
-    public double getAverageFPS() {
-        return AverageFPS;
-    }
-
+    /**
+     * Start Loop is used to begin the loop by setting running to true and calling the run function
+     */
     public void startLoop() {
         isRunning = true;
         start();
     }
 
+    /**
+     * Run is the main game loop handling the constant updating and displaying frames
+     * Aspects of threading are used within here to optimise resources
+     * This function also takes into account the frames and updates per second to see how it's performing and to throttle when needed
+     */
     @Override
     public void run() {
         super.run();
@@ -116,6 +122,9 @@ public class GameLoop extends Thread{
         }
     }
 
+    /**
+     * This is used to combine any loose threads and end the loop before the game/activity is paused or quitted.
+     */
     public void stoploop() {
         isRunning=false;
         //Wait for the run method to return
@@ -126,12 +135,22 @@ public class GameLoop extends Thread{
         }
     }
 
-
+    /**
+     * Getter and Setter Functions
+     */
     public void setscore(int i) {
         this.score = this.score+i;
     }
     public int getscore() {
         return score;
+    }
+
+    public double getAverageUPS() {
+        return AverageUPS;
+    }
+
+    public double getAverageFPS() {
+        return AverageFPS;
     }
 
 }

@@ -9,9 +9,19 @@ import androidx.core.content.ContextCompat;
 //Game over text is displayed when the game is over and the player has died
 public class GameOver {
     private Context context;
+
+    /**
+     * Game over object constructor
+     * @param context
+     */
     public GameOver(Context context){
         this.context = context;
     }
+
+    /**
+     * The draw function draws the game over message over the screen to indicate the player has lost.
+     * @param canvas
+     */
     public void draw(Canvas canvas) {
         String text = "Game Over";
         float x = 800;

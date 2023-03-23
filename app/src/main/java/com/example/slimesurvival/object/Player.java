@@ -14,7 +14,8 @@ import com.example.slimesurvival.Utils;
 import com.example.slimesurvival.graphics.Sprite;
 
 //Player is the playable main character of the game, controlled via joystick
-//Player object is a circle so takes the circle object
+//Player's hitbox is a circle and a sprite is used to display them.
+//Some functions are handled by the parent class circle and it's parent class game object.
 public class Player extends Circle{
 
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;

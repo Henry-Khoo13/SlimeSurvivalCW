@@ -10,7 +10,9 @@ import com.example.slimesurvival.GameLoop;
 import com.example.slimesurvival.R;
 import com.example.slimesurvival.graphics.Sprite;
 
-//Enemy that is moving towards the player to do damage
+/**
+ * This Class supports hostile entities that the game loop generates to try and attack the player
+ */
 public class Enemy extends Circle{
 
     private static final double SPEED_PIXELS_PER_SECOND = Player.SPEED_PIXELS_PER_SECOND*0.6;//Player speed but slower
@@ -21,12 +23,13 @@ public class Enemy extends Circle{
     private static double updatesUntilNextSpawn = UPDATES_PER_SPAWN;
     private final Player player;
     Sprite sprite;
-    public Enemy(Context context, Player player, double positionXi, double positionYi, double radiusi) {//Enemy testing class
-        super(context, ContextCompat.getColor(context, R.color.enemy), positionXi, positionYi, radiusi);
-        this.player = player;
 
-    }
-
+    /**
+     * Constructor to generate a enemy
+     * @param context
+     * @param player
+     * @param sprite
+     */
     public Enemy(Context context, Player player, Sprite sprite) {
         super(context,
                 ContextCompat.getColor(context, R.color.enemy),
@@ -37,7 +40,11 @@ public class Enemy extends Circle{
         this.sprite = sprite;
     }
 
-    //Checks if an enemy should spawn on a given update loop spending on spawns per minute
+    /**
+     * This function is used to check whether an enemy should spawn on a given update loop
+     * This will depend on the Spawn rate determined early in the attributes
+     * @return boolean
+     */
     public static boolean readyToSpawn() {
         if(updatesUntilNextSpawn <= 0){
             updatesUntilNextSpawn += UPDATES_PER_SPAWN;
@@ -48,9 +55,13 @@ public class Enemy extends Circle{
         }
     }
 
+    /**
+     * The Update function determines the distance of the enemy away from the player based on their position
+     * The Direction towards the player is calculated before applying the appropriate velocity changes to position towards the player
+     */
     @Override
     public void update() {
-        //Update the volocity towards the player
+        //Update the velocity and thus position towards the player
 
         //Calculate vector from enemy to player (x AND y)
         double distanceToPlayerX = player.getPositionX() - positionX;
@@ -79,7 +90,12 @@ public class Enemy extends Circle{
         positionY += velocityY;
     }
 
-
+    /**
+     * The draw function draws the enemy
+     * Displaying the sprite on the screen
+     * @param canvas
+     * @param gameDisplay
+     */
     public void draw(Canvas canvas, GameDisplay gameDisplay){
         sprite.draw(canvas,
                 (int)gameDisplay.gameToDisplayCoordinatesX(getPositionX())-sprite.getWidth()/2,

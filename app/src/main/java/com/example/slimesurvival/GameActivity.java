@@ -7,8 +7,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+/**
+ * Main Game activity to start the game itself.
+ */
 public class GameActivity extends Activity {
     private Game game;
+
+    /**
+     * This handles the starting of the game activity and thus the start of the main game running
+     * It again modifies the difficulty passed  to it so that it can create an game oject accordingly.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,35 +49,16 @@ public class GameActivity extends Activity {
         setContentView(game);
     }
 
-
-    @Override
-    protected void onStart() {
-        Log.d("MainActivity.java","onStart()");
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d("MainActivity.java","onResume()");
-        super.onResume();
-    }
+    /**
+     * This is one part of the activity lifecycle and this step has been modified to make sure that the
+     * game reaches a stable pause calling functions before threads start producing errors.
+     */
     @Override
     protected void onPause() {
-        Log.d("MainActivity.java","onPause()");
         game.pause();
         super.onPause();
 
     }
-    @Override
-    protected void onStop() {
-        Log.d("MainActivity.java","onStop()");
-        super.onStop();
-    }
 
-    @Override
-    protected void onDestroy() {
-        Log.d("MainActivity.java","onDestroy()");
-        super.onDestroy();
-    }
 
 }
