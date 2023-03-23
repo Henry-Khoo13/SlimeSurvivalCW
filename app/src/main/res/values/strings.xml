@@ -6,4 +6,7 @@
     <string name="google">Google</string>
     <string name="display_stored_text">Display Stored Text</string>
     <string name="textview">TextView</string>
+    <string name="difficultyBtn2">DiffButton 2</string>
+    <string name="DifficultyBtn1">DiffButton 1</string>
+    <string name="difficultyBtn">DiffButton</string>
 </resources>
