@@ -69,7 +69,7 @@ public class Enemy extends Circle{
 
 
         //Calculate distance between enemy and player
-        double distanceToPlayer = GameObjectgetDistanceBetweenObjects(this, player);
+        double distanceToPlayer = getDistanceBetweenObjects(this, player);
 
 
         //Calculate direction from enemy to player

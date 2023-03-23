@@ -44,7 +44,7 @@ public abstract class GameObject {
      * @param object2
      * @return
      */
-    protected static double GameObjectgetDistanceBetweenObjects(GameObject object1, GameObject object2) {
+    protected static double getDistanceBetweenObjects(GameObject object1, GameObject object2) {
         return Math.sqrt(
                 Math.pow(object2.getPositionX() - object1.getPositionX(),2)+
                         Math.pow(object2.getPositionY() - object1.getPositionY(),2)

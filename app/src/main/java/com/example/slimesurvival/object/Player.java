@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.slimesurvival.GameDisplay;
 import com.example.slimesurvival.GameLoop;
-import com.example.slimesurvival.Joystick;
 import com.example.slimesurvival.R;
 import com.example.slimesurvival.Utils;
 import com.example.slimesurvival.graphics.Sprite;

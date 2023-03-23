@@ -1,8 +1,10 @@
-package com.example.slimesurvival;
+package com.example.slimesurvival.object;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import com.example.slimesurvival.Utils;
 
 /**
  * Joystick class to control the player

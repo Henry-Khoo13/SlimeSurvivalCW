@@ -1,11 +1,8 @@
 package com.example.slimesurvival;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -17,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import com.example.slimesurvival.graphics.SpriteSheet;
 import com.example.slimesurvival.object.Circle;
 import com.example.slimesurvival.object.Enemy;
+import com.example.slimesurvival.object.Joystick;
 import com.example.slimesurvival.object.Player;
 import com.example.slimesurvival.object.Spell;
 
@@ -48,7 +46,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //Initialising Game Loop
         gameLoop = new GameLoop(this, surfaceHolder);
         //Initialising Joystick
-        joystick = new Joystick(275, 700, 70, 40);
+        joystick = new  Joystick(275, 700, 70, 40);
 
         //Initialising Player
         SpriteSheet spriteSheet = new SpriteSheet(context);

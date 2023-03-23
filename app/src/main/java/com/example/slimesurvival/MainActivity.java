@@ -15,7 +15,7 @@ import android.widget.TextView;
 //Main Activity is entry point to our game
 //It handles the main menu which can modify the next game activity on how it will run
 public class MainActivity extends Activity {
-    public int Difficulty;
+    private int Difficulty;
     private TextView DifficultyText;
     private String TEXT;
 

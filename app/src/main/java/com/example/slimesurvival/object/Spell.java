@@ -9,7 +9,7 @@ import com.example.slimesurvival.R;
 
 /**
  * This class handles the objects which are fired from the player
- * Most functions are handled by the parent class Circle, and it's parent class GameObject.
+ * Most functions are handled by the parent class Circle, and it's parent class GameObject
  */
 public class Spell extends Circle {
     private final Player spellcaster;

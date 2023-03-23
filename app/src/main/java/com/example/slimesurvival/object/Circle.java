@@ -37,7 +37,7 @@ public abstract class Circle extends GameObject {
      * @return
      */
     public static boolean isColliding(Circle object1, Circle object2) {
-        double distance = GameObjectgetDistanceBetweenObjects(object1,object2);
+        double distance = getDistanceBetweenObjects(object1,object2);
         double distanceToCollision = object1.getRadius() + object2.getRadius();
         //If the 'distance' between objects lower than 'distancetocollision' total they are colliding
         if(distance<distanceToCollision)
