@@ -38,7 +38,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameOver gameOver;
 
 
-    public Game(Context context) {
+    public Game(Context context,int Difficulty) {
         super(context);
 
         // Get surface holder and add callback
@@ -52,7 +52,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         //Initialising Player
         SpriteSheet spriteSheet = new SpriteSheet(context);
-        player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite());
+        switch(Difficulty){
+            case 1:
+                player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite(),10);
+                break;
+            case 2:
+                player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite(),5);
+                break;
+            case 3:
+                player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite(),1);
+                break;
+            default:
+                player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite(),10);
+                break;
+
+        }
+        //player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite());
+
 
         //Initialising Game over overlay
         gameOver = new GameOver(context);
@@ -141,6 +157,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         drawUPS(canvas);
         drawFPS(canvas);
+        drawPlayerHealth(canvas);
+        drawScore(canvas);
 
 
         joystick.draw(canvas);
@@ -168,7 +186,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         int color = ContextCompat.getColor(getContext(), R.color.magenta);
         paint.setColor(color);
         paint.setTextSize(30);
-        canvas.drawText("UPS: "+averageUPS,100,40,paint);
+        canvas.drawText("UPS: "+averageUPS,100,50,paint);
     }
 
 
@@ -179,9 +197,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         int color = ContextCompat.getColor(getContext(), R.color.magenta);
         paint.setColor(color);
         paint.setTextSize(30);
-        canvas.drawText("FPS: "+averageFPS,100,100,paint);
+        canvas.drawText("FPS: "+averageFPS,100,110,paint);
     }
-
+    public void drawPlayerHealth(Canvas canvas){
+        String health = Integer.toString(player.getHealthPoints());
+        Paint paint = new Paint();
+        int color = ContextCompat.getColor(getContext(), R.color.blue);
+        paint.setColor(color);
+        paint.setTextSize(30);
+        canvas.drawText("health: "+health,1800,50,paint);
+    }
+    public void drawScore(Canvas canvas){
+        String score = Integer.toString(gameLoop.getscore());
+        Paint paint = new Paint();
+        int color = ContextCompat.getColor(getContext(), R.color.blue);
+        paint.setColor(color);
+        paint.setTextSize(30);
+        canvas.drawText("Score: "+score,1800,110,paint);
+    }
     public void update() {
         //Updates the game state
 
@@ -227,6 +260,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 if(Circle.isColliding(spell,enemy)){
                     iteratorSpell.remove();
                     iteratorEnemy.remove();
+                    gameLoop.setscore(1);
                     break;//Only need to collide with one spell
                 }
 

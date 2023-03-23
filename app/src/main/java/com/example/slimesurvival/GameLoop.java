@@ -20,7 +20,7 @@ public class GameLoop extends Thread{
     private Game game;
     private double AverageUPS;
     private double AverageFPS;
-
+    private int score = 0;
 
     public GameLoop(Game game, SurfaceHolder surfaceHolder) {
         this.game = game;
@@ -125,4 +125,13 @@ public class GameLoop extends Thread{
             e.printStackTrace();
         }
     }
+
+
+    public void setscore(int i) {
+        this.score = this.score+i;
+    }
+    public int getscore() {
+        return score;
+    }
+
 }

@@ -16,11 +16,12 @@ import com.example.slimesurvival.graphics.Sprite;
 //Player is the playable main character of the game, controlled via joystick
 //Player object is a circle so takes the circle object
 public class Player extends Circle{
-    public static final int MAX_HEALTH_POINTS = 10;
+
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND/ GameLoop.MAX_UPS;//How fast the player can move
     private final Joystick joystick;
 
+    public int MAX_HEALTH_POINTS = 10;
     private HealthBar healthBar;
 
     private double radius;
@@ -29,11 +30,12 @@ public class Player extends Circle{
     private int healthPoints;
     private Sprite sprite;
 
-    public Player(Context context,Joystick joystick, double positionXi, double positionYi, double radiusi,Sprite sprite){
+    public Player(Context context,Joystick joystick, double positionXi, double positionYi, double radiusi,Sprite sprite,int max_healthi){
         super(context,ContextCompat.getColor(context, R.color.player),positionXi,positionYi, radiusi);//Specifying what constructor to take from
         this.joystick = joystick;
         this.healthBar = new HealthBar(context,this);
-        this.healthPoints = MAX_HEALTH_POINTS;
+        this.healthPoints = max_healthi;
+        this.MAX_HEALTH_POINTS = max_healthi;
         this.sprite = sprite;
     }
 

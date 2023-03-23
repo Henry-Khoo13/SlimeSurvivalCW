@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class GameActivity extends Activity {
     private Game game;
@@ -15,7 +16,24 @@ public class GameActivity extends Activity {
 
         //Set content view to game
         //Objects in the game render to the screen
-        game = new Game(this);
+        if (getIntent().hasExtra("Difficulty"))
+        {
+            switch(getIntent().getExtras().getInt("Difficulty")) {
+                case 1:
+                    game = new Game(this, 1);
+                    break;
+                case 2:
+                    game = new Game(this, 2);
+                    break;
+                case 3:
+                    game = new Game(this, 3);
+
+                    break;
+                default:
+                    game = new Game(this,1);
+            }
+
+        }
         setContentView(game);
     }
 
