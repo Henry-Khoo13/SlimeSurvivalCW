@@ -4,9 +4,7 @@ package com.example.slimesurvival;
 import android.graphics.Canvas;
 import android.view.Surface;
 import android.view.SurfaceHolder;
-
-import java.util.zip.Adler32;
-
+import android.content.Intent;
 /*
 The game Loop of the game is the main engine of the game
 This will handle game progression

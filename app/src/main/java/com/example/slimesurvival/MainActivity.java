@@ -1,59 +1,34 @@
 package com.example.slimesurvival;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.animation.Animator;
-import android.os.Bundle;
-
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;//Setting to full screen
-import android.view.WindowManager;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 //Main Activity is entry points to our application
 public class MainActivity extends Activity {
 
-    private Game game;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        //Set content view to game
-        //Objects in the game render to the screen
-        game = new Game(this);
-        setContentView(game);
+        Button secondActivityBtn = findViewById(R.id.secondActivityBtn);
+        secondActivityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startIntent = new Intent(getApplicationContext(), GameActivity.class); // Intent is the SecondActivity.java class code
+                // how to pass information to another activity
+                //startIntent.putExtra("myKey", "HELLO Second Activity"); // This is like a key : value pair input
+                startActivity(startIntent);
+            }
+        });
     }
 
-
-    @Override
-    protected void onStart() {
-        Log.d("MainActivity.java","onStart()");
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d("MainActivity.java","onResume()");
-        super.onResume();
-    }
-    @Override
-    protected void onPause() {
-        Log.d("MainActivity.java","onPause()");
-        game.pause();
-        super.onPause();
-
-    }
-    @Override
-    protected void onStop() {
-        Log.d("MainActivity.java","onStop()");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d("MainActivity.java","onDestroy()");
-        super.onDestroy();
-    }
 
 }

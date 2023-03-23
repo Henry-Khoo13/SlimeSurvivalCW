@@ -35,6 +35,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int joystickPointerID=0;
     private int numberOfSpellsToCast = 0;
     private GameDisplay gameDisplay;
+    private GameOver gameOver;
 
 
     public Game(Context context) {
@@ -52,6 +53,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //Initialising Player
         SpriteSheet spriteSheet = new SpriteSheet(context);
         player = new Player(getContext(),joystick,500,500,64, spriteSheet.getPlayerSprite());
+
+        //Initialising Game over overlay
+        gameOver = new GameOver(context);
+
 
         //Initialising Enemy
         //enemy = new Enemy(getContext(),player,500,200,30);
@@ -128,11 +133,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         //First drawing the background since everything else will layer ontop
         //It's utilising bitmaps and the stored iamge to provide a background
-        canvas.drawRGB(0, 0, 0);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.background);
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, canvas.getWidth(),    canvas.getHeight(), true);
-        canvas.drawBitmap(scaledBitmap, 0, 0, null);
-
+        //canvas.drawRGB(0, 0, 0);
+        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+        //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, canvas.getWidth(),    canvas.getHeight(), true);
+        //canvas.drawBitmap(scaledBitmap, 0, 0, null);
+        //Current backgrounds looks weird leaving it blank
 
         drawUPS(canvas);
         drawFPS(canvas);
@@ -147,9 +152,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             spell.draw(canvas, gameDisplay);
         }
         //enemy.draw(canvas);
+
+
+        //Draw Game over when dead
+        if(player.getHealthPoints() <= 0){
+            gameOver.draw(canvas);
+        }
+
     }
 
-    //Displays on the screen how many updates per second there are
+    //Displays on the screen     how many updates per second there are
     public void drawUPS(Canvas canvas){
         String averageUPS = Double.toString(gameLoop.getAverageUPS());
         Paint paint = new Paint();
@@ -172,6 +184,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         //Updates the game state
+
+        //stop updating the game if the player is dead
+        if(player.getHealthPoints() <= 0){
+            return;
+        }
         joystick.update();
         player.update();
 

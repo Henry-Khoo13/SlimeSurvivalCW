@@ -12,6 +12,19 @@
     https://www.deviantart.com/entharia/art/Slime-2D-Game-Asset-839864202
     -->
 
+    <Button
+        android:id="@+id/secondActivityBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="276dp"
+        android:layout_marginEnd="8dp"
+        android:text="Display_Text_String"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Display Stored Text" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

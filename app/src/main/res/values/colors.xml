@@ -13,4 +13,5 @@
     <color name="spell">#FF9500</color>
     <color name="healthbarbackground">#A0A0A0</color>
     <color name="healthbar">#00FF12</color>
+    <color name="gameOver">#721008</color>
 </resources>

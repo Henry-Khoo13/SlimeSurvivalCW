@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SlimeSurvival</string>
+
+
+    <string name="second_activity">Second Activity</string>
+    <string name="google">Google</string>
+    <string name="display_stored_text">Display Stored Text</string>
+    <string name="textview">TextView</string>
 </resources>
