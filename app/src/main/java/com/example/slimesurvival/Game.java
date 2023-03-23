@@ -1,8 +1,11 @@
 package com.example.slimesurvival;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -104,6 +107,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             gameLoop = new GameLoop(this, surfaceHolder);
         }
         gameLoop.startLoop();
+
     }
 
     @Override
@@ -121,8 +125,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+
+        //First drawing the background since everything else will layer ontop
+        //It's utilising bitmaps and the stored iamge to provide a background
+        canvas.drawRGB(0, 0, 0);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, canvas.getWidth(),    canvas.getHeight(), true);
+        canvas.drawBitmap(scaledBitmap, 0, 0, null);
+
+
         drawUPS(canvas);
         drawFPS(canvas);
+
 
         joystick.draw(canvas);
         player.draw(canvas, gameDisplay);
