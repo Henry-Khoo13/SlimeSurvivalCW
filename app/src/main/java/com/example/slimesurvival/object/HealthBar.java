@@ -18,6 +18,12 @@ public class HealthBar {
 
     private Paint borderPaint;
     private Paint healthPaint;
+
+    /**
+     * Healthbar constructor
+     * @param context
+     * @param player
+     */
     public HealthBar(Context context, Player player) {
         this.player = player;
 
@@ -34,6 +40,13 @@ public class HealthBar {
 
     }
 
+    /**
+     * Healthbar is spit into two parts, the inner and outline, the inside being the health, and the outline being something to gage against
+     * The two rectangles are created with health being removed based on the percentage of health that palyer has
+     * They are positioned to be above the players head at all times.
+     * @param canvas
+     * @param gameDisplay
+     */
     public void draw(Canvas canvas, GameDisplay gameDisplay){
         float x = (float) player.getPositionX();
         float y = (float) player.getPositionY();

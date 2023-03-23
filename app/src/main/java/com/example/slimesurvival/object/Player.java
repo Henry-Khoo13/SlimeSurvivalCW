@@ -31,6 +31,16 @@ public class Player extends Circle{
     private int healthPoints;
     private Sprite sprite;
 
+    /**
+     * Player constructor
+     * @param context
+     * @param joystick
+     * @param positionXi
+     * @param positionYi
+     * @param radiusi
+     * @param sprite
+     * @param max_healthi
+     */
     public Player(Context context,Joystick joystick, double positionXi, double positionYi, double radiusi,Sprite sprite,int max_healthi){
         super(context,ContextCompat.getColor(context, R.color.player),positionXi,positionYi, radiusi);//Specifying what constructor to take from
         this.joystick = joystick;
@@ -41,6 +51,9 @@ public class Player extends Circle{
     }
 
 
+    /**
+     * Update handles moving the player based on the joystick.
+     */
     public void update() {
         //update speed
         velocityX = joystick.getActuatorX()*MAX_SPEED;
@@ -59,17 +72,27 @@ public class Player extends Circle{
         }
     }
 
-    public void setPosition(double x, double y) {
-        this.positionX = x;
-        this.positionY = y;
-    }
-
+    /**
+     * Draw handles displaying the player sprite.
+     * @param canvas
+     * @param gameDisplay
+     */
     public void draw(Canvas canvas, GameDisplay gameDisplay){
         sprite.draw(canvas,
                 (int)gameDisplay.gameToDisplayCoordinatesX(getPositionX())-sprite.getWidth()/2,
                 (int)gameDisplay.gameToDisplayCoordinatesY(getPositionY())-sprite.getHeight()/2);
         healthBar.draw(canvas,gameDisplay);
     }
+
+    /**
+     * getter and setter functions
+     */
+    public void setPosition(double x, double y) {
+        this.positionX = x;
+        this.positionY = y;
+    }
+
+
     public int getHealthPoints(){
         return healthPoints;
     }

@@ -11,6 +11,15 @@ public abstract class Circle extends GameObject {
 
     protected double radius;
     protected Paint paint;
+
+    /**
+     * Circle constructor
+     * @param context
+     * @param color
+     * @param positionXi
+     * @param positionYi
+     * @param radiusi
+     */
     public Circle(Context context, int color, double positionXi, double positionYi, double radiusi) {
         super(positionXi, positionYi);
         //radius of circle
@@ -21,7 +30,12 @@ public abstract class Circle extends GameObject {
         paint.setColor(color);
     }
 
-    //Checks if two objects are colliding based on position and radi
+    /**
+     * This function checks if two objects are colliding based on position and radi
+     * @param object1
+     * @param object2
+     * @return
+     */
     public static boolean isColliding(Circle object1, Circle object2) {
         double distance = GameObjectgetDistanceBetweenObjects(object1,object2);
         double distanceToCollision = object1.getRadius() + object2.getRadius();
@@ -32,10 +46,11 @@ public abstract class Circle extends GameObject {
             return false;
     }
 
-    private double getRadius() {
-        return radius;
-    }//return radius
-
+    /**
+     * Draws the circle if there isn't a sprite.
+     * @param canvas
+     * @param gameDisplay
+     */
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
 
         canvas.drawCircle(
@@ -45,5 +60,11 @@ public abstract class Circle extends GameObject {
                 paint);
     }
 
+    /**
+     * getter and setter
+     */
+    private double getRadius() {
+        return radius;
+    }//return radius
 
 }
